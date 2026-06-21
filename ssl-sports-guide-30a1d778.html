@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>体彩 · 快捷查询与知识参考</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f6f8fb;
+            color: #1f2a3f;
+            line-height: 1.6;
+        }
+
+        /* 深色头图 hero */
+        .hero {
+            background: linear-gradient(145deg, #0b1424 0%, #1a2740 50%, #0f1b30 100%);
+            color: #e6edf5;
+            padding: 4rem 2rem 3.2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -40%;
+            right: -20%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(255, 220, 100, 0.07) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 2.6rem;
+            font-weight: 550;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+        }
+
+        .hero p {
+            font-size: 1.15rem;
+            max-width: 680px;
+            margin: 1rem auto 0;
+            opacity: 0.85;
+            font-weight: 300;
+        }
+
+        .hero .sub-line {
+            margin-top: 1.6rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.2rem;
+            display: inline-block;
+            font-size: 0.95rem;
+            color: #b6c9e0;
+        }
+
+        /* 浅色内容区 */
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 2.8rem 1.5rem 3.5rem;
+        }
+
+        .section-title {
+            font-size: 1.65rem;
+            font-weight: 540;
+            margin-bottom: 1.2rem;
+            border-left: 5px solid #d4a017;
+            padding-left: 1rem;
+            color: #16202e;
+        }
+
+        .section-sub {
+            color: #3d4d62;
+            margin-top: -0.4rem;
+            margin-bottom: 2rem;
+            font-size: 1rem;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0 2.5rem;
+        }
+
+        .card {
+            background: white;
+            border-radius: 18px;
+            padding: 1.8rem 1.6rem 1.6rem;
+            box-shadow: 0 8px 24px rgba(0, 20, 40, 0.05);
+            transition: 0.2s ease;
+            border: 1px solid #e4eaf2;
+        }
+
+        .card:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+            transform: translateY(-3px);
+        }
+
+        .card h3 {
+            margin-bottom: 0.75rem;
+            font-size: 1.2rem;
+            font-weight: 530;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .card p {
+            color: #2f3e56;
+            font-size: 0.95rem;
+        }
+
+        /* 强调色链接 */
+        a {
+            color: #b8860b;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.15s, border-bottom 0.15s;
+            border-bottom: 1px solid transparent;
+        }
+
+        a:hover {
+            color: #8b6508;
+            border-bottom-color: #c9a02e;
+        }
+
+        .inline-link {
+            border-bottom: 1px dashed #c9a02e;
+        }
+
+        .features-list {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem 2.2rem;
+            margin: 1.8rem 0 2.8rem;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.02);
+        }
+
+        .features-list ul {
+            list-style: none;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem 2rem;
+        }
+
+        .features-list li {
+            padding: 0.25rem 0 0.25rem 1.8rem;
+            position: relative;
+            font-size: 0.98rem;
+        }
+
+        .features-list li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: #b8860b;
+            font-weight: bold;
+        }
+
+        .faq-summary {
+            background: #eef2f7;
+            border-radius: 24px;
+            padding: 2rem 2.2rem;
+            margin: 2.5rem 0 2rem;
+        }
+
+        .faq-summary h2 {
+            font-size: 1.5rem;
+            font-weight: 520;
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item {
+            margin-bottom: 1.2rem;
+        }
+
+        .faq-item strong {
+            display: block;
+            font-weight: 550;
+            margin-bottom: 0.25rem;
+            color: #1a2b40;
+        }
+
+        .faq-item p {
+            margin: 0;
+            color: #30445c;
+        }
+
+        .footer-links {
+            border-top: 1px solid #d5dee8;
+            margin-top: 3rem;
+            padding-top: 2rem;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.5rem 2.8rem;
+            font-size: 0.9rem;
+            color: #4b5b72;
+        }
+
+        .footer-links a {
+            font-weight: 450;
+        }
+
+        .fine-print {
+            text-align: center;
+            margin-top: 1.8rem;
+            font-size: 0.82rem;
+            color: #6f7e94;
+        }
+
+        @media (max-width: 640px) {
+            .hero h1 { font-size: 1.9rem; }
+            .hero { padding: 3rem 1.2rem 2.4rem; }
+            .features-list ul { grid-template-columns: 1fr; }
+            .card-grid { gap: 1.2rem; }
+            .faq-summary { padding: 1.5rem; }
+        }
+    </style>
+</head>
+<body>
+    <section class="hero">
+        <h1>体彩 · 日常查询与实用参考</h1>
+        <p>从号码对照到玩法延展，为理性查阅者提供结构化的信息面板和知识索引。</p>
+        <div class="sub-line">数据参考 · 开奖对照 · 规则摘要</div>
+    </section>
+
+    <div class="container">
+        <!-- 优势区 / 特点卡片 -->
+        <div class="card-grid">
+            <div class="card">
+                <h3>📋 对照查询</h3>
+                <p>按彩种、期号、玩法快速检索历史结果与基本参数，支持多维度筛选。适合日常核对与记录回顾。</p>
+            </div>
+            <div class="card">
+                <h3>📖 玩法说明</h3>
+                <p>整理主要彩种的游戏规则、设奖方案及兑奖须知，帮助用户在参与前充分了解条款与细节。</p>
+            </div>
+            <div class="card">
+                <h3>🔍 延伸阅读</h3>
+                <p>收录常见术语、返奖率解释、兑奖期限等延伸内容，辅助用户建立更完整的知识背景。</p>
+            </div>
+        </div>
+
+        <!-- 说明区：从日常查询切入 自然嵌入链接 -->
+        <h2 class="section-title">从查询到对照</h2>
+        <p style="margin-bottom:1.2rem; max-width:85%;">
+            很多用户在查看开奖结果后，常需要进一步核对中奖条件、玩法规则或兑奖流程。 
+            <a href="https://ssl-sports-lottery.com" style="border-bottom:1px dashed #b8860b;">体彩</a> 
+            的查询系统围绕这一需求，将号码展示与规则说明、奖金速查整合在同一界面，减少页面跳转和反复搜索。
+        </p>
+        <p style="margin-bottom:1.8rem;">
+            例如，在查看某一期号码时，页面会同步显示该玩法的奖级划分、匹配条件以及单注奖金范围。这种对照式的布局让信息获取更连贯，尤其适合希望同时参考多个参数的用户。
+        </p>
+
+        <!-- 场景列表 -->
+        <div class="features-list">
+            <ul>
+                <li>查询历史开奖号码时，同步查看对应玩法的奖级表</li>
+                <li>核对多注号码时，使用批量对照功能减少遗漏</li>
+                <li>查看限号或派奖公告，了解当期销售与奖池动态</li>
+                <li>延伸阅读：返奖率、调节基金、兑奖期限等常见条目</li>
+                <li>不同彩种之间切换查询，保留上次筛选条件</li>
+                <li>按日期、彩种或期号片段快速定位历史数据</li>
+            </ul>
+        </div>
+
+        <!-- FAQ 摘要 -->
+        <div class="faq-summary">
+            <h2>常见问题摘要</h2>
+            <div class="faq-item">
+                <strong>如何确认中奖条件？</strong>
+                <p>每款游戏的规则页面均列明奖级划分与匹配方式。以数字彩为例，一般按照位置、个数或顺序判定。建议在查询号码时同时对照该玩法的奖级说明。</p>
+            </div>
+            <div class="faq-item">
+                <strong>开奖结果多久更新？</strong>
+                <p>通常在现场公证结束后即时发布，部分彩种因流程差异可能有几分钟延迟。页面会标注每期的公告时间。</p>
+            </div>
+            <div class="faq-item">
+                <strong>历史数据可以追溯多久？</strong>
+                <p>主要彩种可查询近两年内的完整期次，更早期的数据可参考存档页。部分高频玩法保留最近 200 期。</p>
+            </div>
+            <div class="faq-item">
+                <strong>什么是限号？对购买有什么影响？</strong>
+                <p>限号指某些号码组合在特定玩法中达到销售限额后暂停接受该组合的投注。这是基于风险控制与返奖率平衡的机制，并非全国统一。</p>
+            </div>
+        </div>
+
+        <!-- 底部链接区域 -->
+        <div class="footer-links">
+            <span><a href="https://ssl-sports-lottery.com">体彩</a> · 信息参考</span>
+            <span>查询帮助</span>
+            <span>玩法汇总</span>
+            <span>版本说明</span>
+        </div>
+        <div class="fine-print">
+            本页为知识型介绍页，提供查询指引与玩法说明摘要。所有数据以官方发布为准。
+        </div>
+    </div>
+</body>
+</html>
