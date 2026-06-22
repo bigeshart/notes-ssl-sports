@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.5">
+    <title>od体育 · 运动生活杂志</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f5f3ef;
+            color: #1e1e1e;
+            line-height: 1.7;
+            letter-spacing: 0.01em;
+        }
+
+        /* 深色头图 */
+        .hero {
+            background: linear-gradient(145deg, #0b0b0b 0%, #1c1c1e 70%, #2a2a2e 100%);
+            color: #eae8e0;
+            padding: 6rem 2rem 5rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            min-height: 40vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hero::before {
+            content: "";
+            position: absolute;
+            top: -30%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(220, 200, 160, 0.08), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero::after {
+            content: "";
+            position: absolute;
+            bottom: -10%;
+            left: -10%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(180, 160, 130, 0.05), transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 400;
+            letter-spacing: 0.08em;
+            margin-bottom: 0.6rem;
+            color: #f0ede5;
+            text-shadow: 0 2px 6px rgba(0, 0, 0, 0.5);
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero p {
+            max-width: 620px;
+            font-size: 1.2rem;
+            color: #c6c2b5;
+            margin: 0.8rem auto 0;
+            font-weight: 300;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero .footnote {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            color: #9c978c;
+            border-top: 1px solid rgba(200, 190, 170, 0.2);
+            padding-top: 1.5rem;
+            width: 80%;
+            max-width: 400px;
+            letter-spacing: 0.05em;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* 浅色正文区 */
+        .content-wrapper {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 3rem 2rem 4rem;
+            background: #faf9f6;
+            box-shadow: 0 -1px 0 rgba(0, 0, 0, 0.02);
+        }
+
+        .magazine-section {
+            margin-bottom: 3rem;
+        }
+
+        .magazine-section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        .section-title {
+            font-size: 1.6rem;
+            font-weight: 350;
+            color: #2d2a24;
+            border-left: 4px solid #b99b7b;
+            padding-left: 1rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.03em;
+        }
+
+        .section-content p {
+            margin-bottom: 1.2rem;
+            font-size: 1.05rem;
+            color: #2f2d2a;
+        }
+
+        .section-content p:last-child {
+            margin-bottom: 0;
+        }
+
+        .highlight-link {
+            color: #7f5d3c;
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s, color 0.2s;
+            font-weight: 450;
+        }
+
+        .highlight-link:hover {
+            border-bottom-color: #7f5d3c;
+            color: #4f3727;
+        }
+
+        .card-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.8rem;
+            margin-top: 1.8rem;
+        }
+
+        .card-item {
+            flex: 1 1 200px;
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 1.6rem 1.4rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.02), 0 0 0 1px rgba(0, 0, 0, 0.02);
+            transition: transform 0.15s ease;
+        }
+
+        .card-item:hover {
+            transform: translateY(-2px);
+        }
+
+        .card-item h3 {
+            font-size: 1.15rem;
+            font-weight: 450;
+            color: #2b2823;
+            margin-bottom: 0.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .card-item p {
+            font-size: 0.95rem;
+            color: #5a5650;
+            line-height: 1.6;
+        }
+
+        .faq-summary {
+            background: #f0ede7;
+            border-radius: 20px;
+            padding: 1.8rem 2rem;
+            margin-top: 2.5rem;
+        }
+
+        .faq-summary h3 {
+            font-size: 1.3rem;
+            font-weight: 380;
+            color: #2d2a24;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .faq-summary details {
+            margin-bottom: 0.8rem;
+            border-bottom: 1px solid #ddd6cb;
+            padding-bottom: 0.8rem;
+        }
+
+        .faq-summary details[open] {
+            border-bottom-color: #b99b7b;
+        }
+
+        .faq-summary summary {
+            font-weight: 420;
+            color: #3e3a33;
+            cursor: pointer;
+            padding: 0.2rem 0;
+            list-style: none;
+            display: flex;
+            align-items: center;
+        }
+
+        .faq-summary summary::-webkit-details-marker {
+            display: none;
+        }
+
+        .faq-summary summary::before {
+            content: "▸";
+            margin-right: 0.6rem;
+            color: #7f5d3c;
+            font-size: 1.1rem;
+            transition: transform 0.2s;
+        }
+
+        .faq-summary details[open] summary::before {
+            transform: rotate(90deg);
+        }
+
+        .faq-summary .answer {
+            margin-top: 0.5rem;
+            padding-left: 1.6rem;
+            color: #4d4942;
+            font-size: 0.95rem;
+        }
+
+        /* 页尾访问提示 */
+        .page-footer {
+            background: #1f1e1b;
+            color: #bcb6ab;
+            text-align: center;
+            padding: 2.8rem 2rem;
+            font-size: 0.95rem;
+            letter-spacing: 0.03em;
+        }
+
+        .page-footer p {
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        .page-footer .brand-link {
+            color: #d9c9b4;
+            text-decoration: none;
+            border-bottom: 1px solid #796a56;
+            transition: color 0.2s;
+        }
+
+        .page-footer .brand-link:hover {
+            color: #f2e2ce;
+            border-bottom-color: #b99b7b;
+        }
+
+        /* 响应式 */
+        @media (max-width: 680px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            .hero p {
+                font-size: 1rem;
+            }
+            .content-wrapper {
+                padding: 2rem 1.2rem 3rem;
+            }
+            .section-title {
+                font-size: 1.3rem;
+            }
+            .card-group {
+                flex-direction: column;
+                gap: 1.2rem;
+            }
+            .card-item {
+                flex: 1 1 auto;
+            }
+            .faq-summary {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 深色头图 -->
+    <header class="hero">
+        <h1>运动 · 节奏 · 视野</h1>
+        <p>在一场又一场的对抗与律动里，找到属于自己的呼吸频率。</p>
+        <div class="footnote">话题 · 赛事 · 日常</div>
+    </header>
+
+    <!-- 浅色正文区 -->
+    <div class="content-wrapper">
+
+        <!-- 第一段：主题背景 -->
+        <section class="magazine-section">
+            <h2 class="section-title">从运动出发的日常叙事</h2>
+            <div class="section-content">
+                <p>
+                    运动从来不只是胜负的数字。它关乎身体如何与地面对话，关乎节奏如何从肌肉蔓延到意识。<a href="https://portal-odsport.com" class="highlight-link">od体育</a>所关注的，正是这种渗透在日常中的运动质感——不喧哗，但始终在场。无论是清晨跑道上重复的脚步声，还是球场上一次默契的传球，每一帧都构成了一幅流动的图景。
+                </p>
+                <p>
+                    我们相信，运动的魅力藏在细节里：一次恰到好处的卡位，一组稳定的呼吸，一段独自训练后的平静。这些瞬间不需要夸张的渲染，却足以成为持续投入的理由。而 od体育 希望成为陪伴者，记录并连接这些真实而生动的片段。
+                </p>
+            </div>
+        </section>
+
+        <!-- 第二段：三个小卡片，自然过渡 -->
+        <section class="magazine-section">
+            <h2 class="section-title">三个侧面</h2>
+            <div class="card-group">
+                <div class="card-item">
+                    <h3>身体与感知</h3>
+                    <p>学会倾听肌肉的讯号，把训练变成一种自我对话。力量与柔韧不是目的，而是探索边界的方式。</p>
+                </div>
+                <div class="card-item">
+                    <h3>节奏与习惯</h3>
+                    <p>每周固定的运动时间，逐渐成为生活锚点。从适应到依赖，节奏本身会带来秩序与放松。</p>
+                </div>
+                <div class="card-item">
+                    <h3>社群与共鸣</h3>
+                    <p>独自训练有它的沉静，群体运动有它的共振。分享同一片场地，默契在眼神与动作中生长。</p>
+                </div>
+            </div>
+            <p style="margin-top: 1.2rem; color: #5a5650; font-size: 0.95rem; border-top: 1px solid #e4dfd7; padding-top: 1rem;">
+                这些侧面并非孤立，它们常常在一次完整的训练中交替出现。而 od体育 试图呈现的，正是这种交织的状态。
+            </p>
+        </section>
+
+        <!-- 第三段：场景与视角 -->
+        <section class="magazine-section">
+            <h2 class="section-title">一个下午的训练笔记</h2>
+            <div class="section-content">
+                <p>
+                    假设一个普通的周三下午。球场被晒出温热的气息，球鞋与地面摩擦的声音持续了三十分钟。跑动、急停、变向——动作并不完美，但每一次尝试都在调整角度与用力方式。汗滴落在胶粒上，瞬间蒸发。你忽然意识到，注意力完全集中在当下，那些反复出现的念头暂时退出了脑海。
+                </p>
+                <p>
+                    这就是运动带来的另一种时间流速。它不承诺立竿见影的改变，却在日复一日的积累中，重塑一个人对自我身体的理解。<a href="https://portal-odsport.com" class="highlight-link">od体育</a>想做的，就是陪着这种节奏走下去——不催促，不粉饰，只是忠实地呈现运动本来的样貌。
+                </p>
+            </div>
+        </section>
+
+        <!-- FAQ 摘要（非硬广） -->
+        <div class="faq-summary">
+            <h3>一些常见但值得细想的问题</h3>
+            <details>
+                <summary>运动频率怎样才合理？</summary>
+                <div class="answer">没有绝对的标准。重要的是保持连续性，哪怕一周两次、每次四十分钟，也比高强度但难以坚持的模式更可持续。关键在找到让自己感到舒服的节奏。</div>
+            </details>
+            <details>
+                <summary>如何选择适合自己的方向？</summary>
+                <div class="answer">可以尝试几种不同类型的运动，观察身体与情绪的反馈。球类、跑步、力量训练、瑜伽——每种都有独特的体验维度。选择门槛最低、最让你期待下一次的那一种。</div>
+            </details>
+            <details>
+                <summary>运动时总是分心怎么办？</summary>
+                <div class="answer">分心是常态。试着把注意力带回呼吸或脚步节奏，不必苛责自己。专注力像肌肉一样需要训练，每次拉回来，就是一次微小的进步。</div>
+            </details>
+        </div>
+
+    </div>
+
+    <!-- 页尾访问提示 -->
+    <footer class="page-footer">
+        <p>
+            运动是一种持续的状态，没有终点，只有下一段路程。<br>
+            如果你也在寻找属于自己的运动节奏，不妨看看 <a href="https://portal-odsport.com" class="brand-link">od体育</a> 的内容，或许会有意想不到的共鸣。
+        </p>
+    </footer>
+
+</body>
+</html>
